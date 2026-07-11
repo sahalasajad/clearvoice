@@ -17,7 +17,14 @@ export function isRelevant(transcript, selectedTracking) {
   const transcriptWords = normalize(transcript).split(" ");
   const trackingWords = normalize(selectedTracking).split(" ");
 
+  const isNumericToken = (s) => /\d/.test(s);
+
   return trackingWords.every(tWord =>
-    transcriptWords.some(word => levenshtein(word, tWord) <= 1)
+    transcriptWords.some(word => {
+      if (isNumericToken(tWord)) {
+        return word === tWord; // exact match only for numbers
+      }
+      return levenshtein(word, tWord) <= 1;
+    })
   );
 }
