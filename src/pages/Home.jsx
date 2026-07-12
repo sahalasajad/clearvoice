@@ -1,112 +1,160 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Fixed duplicate imports
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const navigate = useNavigate();
   const [selectedHub, setSelectedHub] = useState(null); // 'railway' or 'airport'
 
-  // Added basic placeholder styles to prevent runtime errors
   const styles = {
-    page: { position: "relative", minHeight: "100vh", paddingBottom: "80px" },
-    hero: { padding: "2rem 0" }
+    page: {
+      minHeight: "100vh",
+      paddingBottom: "100px",
+      background: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)",
+      fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+    },
+    heroCard: {
+      background: "rgba(255, 255, 255, 0.85)",
+      backdropFilter: "blur(10px)",
+      borderRadius: "24px",
+      boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.07)",
+    },
+    hubCard: {
+      cursor: "pointer",
+      transition: "transform 0.2s ease, box-shadow 0.2s ease",
+    }
   };
 
   return (
-    <div style={styles.page}>
-      {/* Hero */}
-      <section style={styles.hero}>
-        <div className="container">
-
-          <h1 className="display-3 fw-bold">
-            🔊 ClearAir
+    <div style={styles.page} className="py-4">
+      <div className="container px-4">
+        
+        {/* Main Branding Header */}
+        <div className="text-center my-4">
+          <h1 className="display-4 fw-black text-dark mb-1 d-flex align-items-center justify-content-center gap-2">
+            <span>🔊</span> ClearAir
           </h1>
+          <span className="badge bg-dark px-3 py-2 rounded-pill text-uppercase tracking-wider">
+            Accessibility Hub
+          </span>
+        </div>
 
-          <h4 className="mt-3">
-            Accessible Railway Announcements
-          </h4>
-
-          <p className="mt-4 fs-5">
-            Helping Deaf and Hard-of-Hearing passengers
-            receive live railway announcements through
-            captions, emergency alerts and ISL support.
+        {/* Hero & Intro Section */}
+        <div className="p-4 mb-4" style={styles.heroCard}>
+          <h4 className="fw-bold text-secondary mb-2">Real-Time Transit Transcripts</h4>
+          <p className="text-muted mb-0 lh-base">
+            Helping Deaf and Hard-of-Hearing passengers receive live transit announcements through 
+            instant captions, high-priority emergency alerts, and sign language support.
           </p>
+        </div>
 
-          <div className="mt-5">
-            <Link
-              to="/live-announcement"
-              className="btn btn-primary btn-lg"
-            >
-              Start Listening
-            </Link>
-
-            <Link
-              to="/history"
-              className="btn btn-outline-light btn-lg"
-            >
-              ⚡ Fast Track Setup
-            </Link>
-          </div> {/* Fixed missing closing tag for links container */}
-
-          <h2 className="fs-6 fw-bold text-uppercase text-muted my-4 px-1">
-            Choose Hub Configuration
+        {/* Interactive Hub Selector */}
+        <div className="my-4">
+          <h2 className="fs-6 fw-bold text-uppercase text-secondary tracking-wide mb-3 px-1">
+            Where are you traveling today?
           </h2>
 
-          <div className="d-flex flex-column gap-3">
+          <div className="row g-3">
             {/* Railway Card */}
-            <div
-              onClick={() => setSelectedHub('railway')}
-              className={`card p-3 border-3 d-flex flex-row align-items-center gap-3 rounded-4 active-scale transition-all ${selectedHub === 'railway'
-                  ? 'border-primary bg-primary bg-opacity-10 shadow-sm'
-                  : 'border-light bg-light bg-opacity-50'
+            <div className="col-12 col-md-6">
+              <div
+                onClick={() => setSelectedHub('railway')}
+                className={`card p-4 border-2 h-100 rounded-4 d-flex flex-row align-items-center gap-3 shadow-sm ${
+                  selectedHub === 'railway'
+                    ? 'border-primary bg-white ring-2 ring-primary'
+                    : 'border-white bg-white bg-opacity-60'
                 }`}
-              style={{ cursor: 'pointer' }}
-            >
-              <div className="fs-1 bg-white p-2 rounded-3 shadow-sm">🚆</div>
-              <div className="flex-grow-1">
-                <h3 className="fw-bold fs-5 text-dark mb-0">Railway</h3>
-                <p className="text-muted small mb-0">Platforms, Tracks & Trains</p>
+                style={{
+                  ...styles.hubCard,
+                  transform: selectedHub === 'railway' ? 'scale(1.02)' : 'scale(1)',
+                }}
+              >
+                <div className="fs-1 bg-primary bg-opacity-10 p-3 rounded-4 shadow-sm text-primary">
+                  🚆
+                </div>
+                <div className="flex-grow-1">
+                  <h3 className="fw-bold fs-4 text-dark mb-1">Railway Hub</h3>
+                  <p className="text-muted small mb-0">Track platforms, train timelines & boarding calls</p>
+                </div>
+                <div 
+                  className={`rounded-circle d-flex align-items-center justify-content-center transition-all`} 
+                  style={{ 
+                    width: "28px", 
+                    height: "28px", 
+                    border: "2px solid #0d6efd",
+                    backgroundColor: selectedHub === 'railway' ? '#0d6efd' : 'transparent',
+                    color: '#fff'
+                  }}
+                >
+                  {selectedHub === 'railway' && "✓"}
+                </div>
               </div>
-              {selectedHub === 'railway' && (
-                <div className="bg-primary rounded-circle p-1 text-white text-center fs-6" style={{ width: "24px", height: "24px", lineHeight: "14px" }}>✓</div>
-              )}
             </div>
 
             {/* Airport Card */}
-            <div
-              onClick={() => setSelectedHub('airport')}
-              className={`card p-3 border-3 d-flex flex-row align-items-center gap-3 rounded-4 active-scale transition-all ${selectedHub === 'airport'
-                  ? 'border-primary bg-primary bg-opacity-10 shadow-sm'
-                  : 'border-light bg-light bg-opacity-50'
+            <div className="col-12 col-md-6">
+              <div
+                onClick={() => setSelectedHub('airport')}
+                className={`card p-4 border-2 h-100 rounded-4 d-flex flex-row align-items-center gap-3 shadow-sm ${
+                  selectedHub === 'airport'
+                    ? 'border-info bg-white ring-2 ring-info'
+                    : 'border-white bg-white bg-opacity-60'
                 }`}
-              style={{ cursor: 'pointer' }}
-            >
-              <div className="fs-1 bg-white p-2 rounded-3 shadow-sm">✈️</div>
-              <div className="flex-grow-1">
-                <h3 className="fw-bold fs-5 text-dark mb-0">Airport</h3>
-                <p className="text-muted small mb-0">Gates, Flights & Terminals</p>
+                style={{
+                  ...styles.hubCard,
+                  transform: selectedHub === 'airport' ? 'scale(1.02)' : 'scale(1)',
+                }}
+              >
+                <div className="fs-1 bg-info bg-opacity-10 p-3 rounded-4 shadow-sm text-info">
+                  ✈️
+                </div>
+                <div className="flex-grow-1">
+                  <h3 className="fw-bold fs-4 text-dark mb-1">Airport Hub</h3>
+                  <p className="text-muted small mb-0">Monitor terminal gates, flight delays & baggage drops</p>
+                </div>
+                <div 
+                  className={`rounded-circle d-flex align-items-center justify-content-center transition-all`} 
+                  style={{ 
+                    width: "28px", 
+                    height: "28px", 
+                    border: "2px solid #0dcaf0",
+                    backgroundColor: selectedHub === 'airport' ? '#0dcaf0' : 'transparent',
+                    color: '#fff'
+                  }}
+                >
+                  {selectedHub === 'airport' && "✓"}
+                </div>
               </div>
-              {selectedHub === 'airport' && (
-                <div className="bg-primary rounded-circle p-1 text-white text-center fs-6" style={{ width: "24px", height: "24px", lineHeight: "14px" }}>✓</div>
-              )}
             </div>
           </div>
+        </div>
 
-          {/* Dynamic Floating Action Button */}
-          {selectedHub && (
-            <div className="mt-4 px-1 animate-fade-in">
+        {/* Dynamic Context Action Trigger */}
+        <div style={{ minHeight: "80px" }} className="mt-4">
+          {selectedHub ? (
+            <div className="animate-fade-in text-center">
+              <p className="text-muted small mb-2 fw-semibold">
+                Ready to stream live updates for your {selectedHub === 'railway' ? 'Train' : 'Flight'}?
+              </p>
               <button
-                onClick={() => navigate(`/track-selection?hub=${selectedHub}`)}
-                className="btn btn-dark w-100 py-3 rounded-3 fw-bold fs-6 shadow active-scale"
+                onClick={() => navigate(`/live-announcement?hub=${selectedHub}`)}
+                className={`btn btn-lg w-100 py-3 rounded-4 fw-bold shadow active-scale text-white border-0 transition-all ${
+                  selectedHub === 'railway' ? 'bg-primary' : 'bg-info'
+                }`}
               >
-                Configure Specific {selectedHub === 'railway' ? 'Platform' : 'Gate'} ➔
+                🎯 Start Listening to {selectedHub === 'railway' ? 'Railway' : 'Airport'} Announcements
               </button>
+            </div>
+          ) : (
+            <div className="text-center p-3 border border-dashed rounded-4 bg-light text-muted">
+              Select a transport option above to begin listening.
             </div>
           )}
         </div>
-      </section>
+
+      </div>
 
       {/* --- NATIVE APP BOTTOM NAV BAR --- */}
-      <nav className="position-fixed bottom-0 start-0 end-0 bg-white border-top d-flex justify-content-around align-items-center p-2 z-3" style={{ height: "75px" }}>
+      <nav className="position-fixed bottom-0 start-0 end-0 bg-white border-top d-flex justify-content-around align-items-center p-2 z-3 shadow-lg" style={{ height: "75px" }}>
         <button
           onClick={() => navigate("/")}
           className="btn btn-link text-decoration-none text-primary d-flex flex-column align-items-center justify-content-center p-1"
@@ -135,4 +183,4 @@ function Home() {
   );
 }
 
-export default Home;
+
