@@ -43,7 +43,7 @@ function Home() {
         <div className="container">
 
           <h1 className="display-3 fw-bold">
-            🔊 ClearAir
+            🔊 ClearVoice
           </h1>
 
           <h4 className="mt-3">
@@ -58,7 +58,7 @@ function Home() {
 
           <div className="mt-5">
             <Link
-              to="/track-selection"
+              to="/live-announcement"
               className="btn btn-light btn-lg me-3"
             >
               Start Listening
