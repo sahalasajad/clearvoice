@@ -43,7 +43,7 @@ function Home() {
         <div className="container">
 
           <h1 className="display-3 fw-bold">
-            🔊 ClearAir
+            🔊 ClearVoice
           </h1>
 
           <h4 className="mt-3">
