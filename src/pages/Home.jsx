@@ -6,32 +6,36 @@ function Home() {
   const [selectedHub, setSelectedHub] = useState(null); // 'railway' or 'airport'
 
   return (
-    <div 
-      className="mx-auto bg-white d-flex flex-column justify-content-between min-vh-100 position-relative shadow" 
-      style={{ maxWidth: "430px", paddingBottom: "90px" }}
-    >
-      <div>
-        {/* --- APP HEADER --- */}
-        <header className="text-center pt-4 pb-3 px-3 border-bottom sticky-top bg-white z-3">
-          <h1 className="fw-black fs-2 text-dark mb-0 d-flex align-items-center justify-content-center gap-2">
-            🤟 <span>VisualAnnounce</span>
-          </h1>
-          <div className="d-flex align-items-center justify-content-center gap-2 mt-1">
-            <span className="spinner-grow spinner-grow-sm text-success" role="status"></span>
-            <small className="text-muted fw-bold tracking-wider text-uppercase small">System Ready</small>
-          </div>
-        </header>
+    <div style={styles.page}>
+      {/* Hero */}
+      <section style={styles.hero}>
+        <div className="container">
 
-        {/* --- SCROLLABLE MAIN BODY --- */}
-        <main className="p-3">
-          
-          {/* Hero Banner */}
-          <div className="card border-0 bg-primary text-white p-4 mb-4 rounded-4 text-center">
-            <h3 className="fw-bold mb-2 fs-4">Tap to Start</h3>
-            <p className="small opacity-75 mb-3">Select your location structure to route audio logs to your screen instantly.</p>
-            <button 
-              onClick={() => navigate("/track-selection")}
-              className="btn btn-light w-100 py-3 fw-bold rounded-3 shadow-sm border-0 fs-6 active-scale"
+          <h1 className="display-3 fw-bold">
+            🔊 ClearAir
+          </h1>
+
+          <h4 className="mt-3">
+            Accessible Railway Announcements
+          </h4>
+
+          <p className="mt-4 fs-5">
+            Helping Deaf and Hard-of-Hearing passengers
+            receive live railway announcements through
+            captions, emergency alerts and ISL support.
+          </p>
+
+          <div className="mt-5">
+            <Link
+              to="/track-selection"
+              className="btn btn-light btn-lg me-3"
+            >
+              Start Listening
+            </Link>
+
+            <Link
+              to="/history"
+              className="btn btn-outline-light btn-lg"
             >
               ⚡ Fast Track Setup
             </button>
