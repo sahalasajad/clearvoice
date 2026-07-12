@@ -1,23 +1,31 @@
+import emergencyVideo from "../isl/emergency.mp4";
+import evacuateVideo from "../isl/evacuate.mp4";
+import cancelVideo from "../isl/cancel.mp4";
+import delayVideo from "../isl/delay.mp4";
+
 const EMERGENCY_KEYWORDS = [
-  "emergency", "evacuate", "cancel", "delay", "security alert"
+  "emergency",
+  "evacuate",
+  "cancel",
+  "delay",
+  "security alert",
 ];
 
-// Map your keywords to your actual mp4 files in src/isl/
 const VIDEO_MAP = {
-  "emergency": "emergency.mp4",
-  "evacuate": "evacuate.mp4",
-  "cancel": "cancel.mp4",
-  "delay": "delay.mp4",
-  "security alert": "emergency.mp4"
+  emergency: emergencyVideo,
+  evacuate: evacuateVideo,
+  cancel: cancelVideo,
+  delay: delayVideo,
+  "security alert": emergencyVideo,
 };
 
 export function isEmergency(transcript) {
   const lower = transcript.toLowerCase();
-  const found = EMERGENCY_KEYWORDS.find(k => lower.includes(k));
-  
+  const found = EMERGENCY_KEYWORDS.find((k) => lower.includes(k));
+
   return {
     matched: !!found,
     keyword: found,
-    videoFile: found ? (VIDEO_MAP[found] || "emergency.mp4") : null
+    videoFile: found ? VIDEO_MAP[found] : null,
   };
 }
