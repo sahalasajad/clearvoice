@@ -1,21 +1,15 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import LiveAnnouncement from "./pages/LiveAnnouncement";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
 
-      {/* Temporary Pages */}
-      <Route
-        path="/track-selection"
-        element={
-          <div className="container mt-5">
-            <h1>Track Selection Page</h1>
-          </div>
-        }
-      />
+      <Route path="/live-announcement" element={<LiveAnnouncement />} />
 
+      {/* Temporary Pages */}
       <Route
         path="/history"
         element={
