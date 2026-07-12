@@ -12,12 +12,12 @@ function levenshtein(a, b) {
   return dp[a.length][b.length];
 }
 
-export function isRelevant(transcript, selectedTracking) {
-  const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9 ]/g, "").trim();
-  const transcriptWords = normalize(transcript).split(" ");
-  const trackingWords = normalize(selectedTracking).split(" ");
+const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9 ]/g, "").trim();
+const isNumericToken = (s) => /\d/.test(s);
 
-  const isNumericToken = (s) => /\d/.test(s);
+function matchSingleItem(transcript, trackingItem) {
+  const transcriptWords = normalize(transcript).split(" ");
+  const trackingWords = normalize(trackingItem).split(" ");
 
   return trackingWords.every(tWord =>
     transcriptWords.some(word => {
@@ -27,4 +27,13 @@ export function isRelevant(transcript, selectedTracking) {
       return levenshtein(word, tWord) <= 1;
     })
   );
+}
+
+export function isRelevant(transcript, selectedTracking) {
+  const trackingItems = selectedTracking
+    .split(",")
+    .map(s => s.trim())
+    .filter(Boolean);
+
+  return trackingItems.some(item => matchSingleItem(transcript, item));
 }

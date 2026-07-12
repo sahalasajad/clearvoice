@@ -39,17 +39,21 @@ export default function LiveAnnouncement() {
       <h2>Live Announcements</h2>
 
       <div className="mb-3">
-        <label>
-          Tracking:{" "}
-          <input
-            className="form-control"
-            style={{ maxWidth: "300px", display: "inline-block" }}
-            value={selectedTracking}
-            onChange={(e) => setSelectedTracking(e.target.value)}
-            placeholder="e.g. Platform 5"
-          />
-        </label>
-      </div>
+    <label htmlFor="tracking-input" className="form-label d-block">
+        What would you like to track?
+    </label>
+    <input
+        id="tracking-input"
+        className="form-control"
+        style={{ maxWidth: "300px" }}
+        value={selectedTracking}
+        onChange={(e) => setSelectedTracking(e.target.value)}
+        placeholder="e.g. Platform 1, Gate A, Train 12034"
+    />
+    <small className="form-text text-muted">
+        Enter one or more values, separated by commas
+    </small>
+    </div>
 
       <button
         className="btn btn-primary mb-3"
