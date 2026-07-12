@@ -78,7 +78,7 @@ export default function LiveAnnouncement() {
           {/* Video Player playing from your src/isl folder */}
           <div className="ratio ratio-16x9 my-3 bg-black rounded overflow-hidden">
             <video 
-              src={`/src/isl/${activeVideo}`} 
+              src={activeVideo} 
               autoPlay 
               controls 
               playsInline 
