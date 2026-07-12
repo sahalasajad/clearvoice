@@ -183,4 +183,4 @@ function Home() {
   );
 }
 
-
+export default Home; // <--- This line is critical to fix the App.jsx routing error
